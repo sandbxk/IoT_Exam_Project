@@ -1,18 +1,15 @@
 
+#define MICROWAVE_SENSOR_PIN 0
 
 // the setup routine runs once when you press reset:
 void setup() {
+  pinMode(MICROWAVE_SENSOR_PIN, INPUT);
   Serial.begin(9600);
-  pinMode(BUILTIN_LED, OUTPUT);
 }
 
 // the loop routine runs over and over again forever:
 void loop() {
-  // say hi
-  Serial.write("Hello World");
-  // blink the LED
-  digitalWrite(BUILTIN_LED, HIGH);
-  delay(1000);
-  digitalWrite(BUILTIN_LED, LOW);
+  int microwaveSensorValue = digitalRead(MICROWAVE_SENSOR_PIN);
+  Serial.println(microwaveSensorValue);
   delay(1000);
 }
