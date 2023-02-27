@@ -3,8 +3,8 @@
 
 // the setup routine runs once when you press reset:
 void setup() {
-  pinMode(MICROWAVE_SENSOR_PIN, INPUT);
-  Serial.begin(9600);
+  pinMode(MICROWAVE_SENSOR_PIN, INPUT_PULLDOWN);
+  Serial.begin(115200);
 }
 
 // the loop routine runs over and over again forever:
