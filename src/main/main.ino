@@ -1,4 +1,4 @@
-#include <ArduinoMqttClient.h>
+#include <ArduinoMqttClient->h>
 #include <WiFi.h>
 #include "arduino_secrets.h"
 ///////please enter your sensitive data in the Secret tab/arduino_secrets.h
@@ -46,10 +46,10 @@ void setup() {
 
   // You can provide a unique client ID, if not set the library uses Arduino-millis()
   // Each client must have a unique client ID
-  // mqttClient.setId("clientId");
+  // mqttClient->setId("clientId");
 
   // You can provide a username and password for authentication
-  // mqttClient.setUsernamePassword("username", "password");
+  // mqttClient->setUsernamePassword("username", "password");
 
   Serial.print("Attempting to connect to the MQTT broker: ");
   Serial.println(broker);
@@ -62,6 +62,23 @@ void setup() {
   }
 
   Serial.println("You're connected to the MQTT broker!");
+  Serial.println();
+
+    Serial.println("You're connected to the MQTT broker!");
+  Serial.println();
+
+  Serial.print("Subscribing to topic: ");
+  Serial.println(topic);
+  Serial.println();
+
+  // subscribe to a topic
+  mqttClient->subscribe(topic);
+
+  // topics can be unsubscribed using:
+  // mqttClient->unsubscribe(topic);
+
+  Serial.print("Waiting for messages on topic: ");
+  Serial.println(topic);
   Serial.println();
 }
 
@@ -92,5 +109,24 @@ void loop() {
     Serial.println();
 
     count++;
+  }
+
+  // check for incoming messages
+  int messageSize = mqttClient->parseMessage();
+  if (messageSize) {
+    // we received a message, print out the topic and contents
+    Serial.print("Received a message with topic '");
+    Serial.print(mqttClient->messageTopic());
+    Serial.print("', length ");
+    Serial.print(messageSize);
+    Serial.println(" bytes:");
+
+    // use the Stream interface to print the contents
+    while (mqttClient->available()) {
+      Serial.print((char)mqttClient->read());
+    }
+    Serial.println();
+
+    Serial.println();
   }
 }
