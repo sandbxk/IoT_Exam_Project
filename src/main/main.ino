@@ -1,28 +1,30 @@
-#include <ArduinoMqttClient->h>
+
+// std includes
+#include <string>
+
+// Arduino & ESP32
+#include <ArduinoMqttClient.h>
 #include <WiFi.h>
+
+// Internal includes
 #include "arduino_secrets.h"
+
 ///////please enter your sensitive data in the Secret tab/arduino_secrets.h
-char ssid[] = SECRET_SSID;    // your network SSID (name)
-char pass[] = SECRET_PASS;    // your network password (use for WPA, or use as key for WEP)
+const std::string ssid = SECRET_SSID;    // your network SSID (name)
+const std::string pass = SECRET_PASS;    // your network password (use for WPA, or use as key for WEP)
 
+const std::string id              = MQTT_CLIENT_ID;   // your device ID
+const std::string broker          = MQTT_BROKER; // your MQTT broker
+const std::string default_topic   = MQTT_DEFAULT_TOPIC; // your MQTT topic
+const size_t port                 = MQTT_PORT; // your MQTT broker port
 
-// To connect with SSL/TLS:
-// 1) Change WiFiClient to WiFiSSLClient.
-// 2) Change port value from 1883 to 8883.
-// 3) Change broker value to a server with a known SSL/TLS root certificate 
-//    flashed in the WiFi module.
+// function prototypes
+void checkIncomingMessage();
+void sendMessageForTopic(const std::string& topic, const std::string& message);
 
+// global entities
 WiFiClient wifiClient;
 MqttClient* mqttClient = new MqttClient(wifiClient);
-
-const char broker[] = "test.mosquitto.org";
-int        port     = 1883;
-const char topic[]  = "arduino/simple";
-
-const long interval = 1000;
-unsigned long previousMillis = 0;
-
-int count = 0;
 
 void setup() {
   //Initialize serial and wait for port to open:
@@ -31,64 +33,57 @@ void setup() {
     ; // wait for serial port to connect. Needed for native USB port only
   }
 
+
   // attempt to connect to WiFi network:
   Serial.print("Attempting to connect to WPA SSID: ");
-  Serial.println(ssid);
-  while (WiFi.begin(ssid, pass) != WL_CONNECTED) {
-    // failed, retry
-    Serial.print(".");
-    delay(5000);
+  Serial.println(SECRET_SSID);
+
+  WiFi.begin(ssid.c_str());
+  while (!WiFi.isConnected()) {
+    // todo: add timeout and restart if not connected.
+    delay(2000);
   }
 
-  Serial.println("You're connected to the network");
-  Serial.println();
 
-
-  // You can provide a unique client ID, if not set the library uses Arduino-millis()
-  // Each client must have a unique client ID
-  // mqttClient->setId("clientId");
-
-  // You can provide a username and password for authentication
-  // mqttClient->setUsernamePassword("username", "password");
+  mqttClient->setId(id.c_str());
+  mqttClient->setUsernamePassword(SECRET_FLESPI_TOKEN, "");
 
   Serial.print("Attempting to connect to the MQTT broker: ");
-  Serial.println(broker);
+  Serial.println(broker.c_str());
 
-  if (!mqttClient->connect(broker, port)) {
+  if (!mqttClient->connect(broker.c_str(), port)) {
     Serial.print("MQTT connection failed! Error code = ");
     Serial.println(mqttClient->connectError());
 
+    // todo restart if fail.
     while (1);
   }
 
   Serial.println("You're connected to the MQTT broker!");
   Serial.println();
 
-    Serial.println("You're connected to the MQTT broker!");
-  Serial.println();
-
   Serial.print("Subscribing to topic: ");
-  Serial.println(topic);
+  Serial.println(default_topic.c_str());
   Serial.println();
 
   // subscribe to a topic
-  mqttClient->subscribe(topic);
+  mqttClient->subscribe(default_topic.c_str());
 
   // topics can be unsubscribed using:
   // mqttClient->unsubscribe(topic);
 
   Serial.print("Waiting for messages on topic: ");
-  Serial.println(topic);
+  Serial.println(default_topic.c_str());
   Serial.println();
 }
 
-void loop() {
-  // call poll() regularly to allow the library to send MQTT keep alives which
-  // avoids being disconnected by the broker
-  mqttClient->poll();
+int count = 0;
+unsigned long previousMillis = 0;
+long interval = 1000;
 
-  // to avoid having delays in loop, we'll use the strategy from BlinkWithoutDelay
-  // see: File -> Examples -> 02.Digital -> BlinkWithoutDelay for more info
+void loop() {
+
+  /*
   unsigned long currentMillis = millis();
   
   if (currentMillis - previousMillis >= interval) {
@@ -97,36 +92,43 @@ void loop() {
 
     Serial.print("Sending message to topic: ");
     Serial.println(topic);
-    Serial.print("hello ");
     Serial.println(count);
 
     // send message, the Print interface can be used to set the message contents
-    mqttClient->beginMessage(topic);
-    mqttClient->print("hello ");
-    mqttClient->print(count);
-    mqttClient->endMessage();
+    sendMessageForTopic("arduino", "hello");
 
     Serial.println();
 
     count++;
   }
+  */
 
   // check for incoming messages
-  int messageSize = mqttClient->parseMessage();
-  if (messageSize) {
+  checkIncomingMessage();
+}
+
+void sendMessageForTopic(const std::string& topic, const std::string& message) {
+  mqttClient->beginMessage(topic.c_str());
+  mqttClient->print(message.c_str());
+  mqttClient->endMessage();
+}
+
+void checkIncomingMessage() {
+  // check for incoming messages
+  auto len = mqttClient->parseMessage(); // calls poll internally
+
+  if (len > 0) {
     // we received a message, print out the topic and contents
     Serial.print("Received a message with topic '");
     Serial.print(mqttClient->messageTopic());
     Serial.print("', length ");
-    Serial.print(messageSize);
+    Serial.print(len);
     Serial.println(" bytes:");
 
-    // use the Stream interface to print the contents
-    while (mqttClient->available()) {
-      Serial.print((char)mqttClient->read());
-    }
-    Serial.println();
+    uint8_t* message = new uint8_t[len + 1]; // +1 for null terminator
+    memset(message, '\0', len + 1); // null initialize the buffer
 
-    Serial.println();
+    mqttClient->read(message, len);
+    Serial.println((char*)message);
   }
 }
