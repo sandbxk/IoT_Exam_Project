@@ -15,15 +15,17 @@ void loop() {
 
   Serial.write("Hello World!");
   
-  /*
+
   digitalWrite(MOTOR_1A, HIGH);
   digitalWrite(MOTOR_2A, LOW);
+  
   Serial.write("Hello World!");
   delay(5000);
   digitalWrite(MOTOR_1A, LOW);
   digitalWrite(MOTOR_2A, HIGH);
   delay(5000);
+  
 
-  */
+
   
 }
