@@ -12,18 +12,15 @@ void setup() {
 
 // the loop routine runs over and over again forever:
 void loop() {
-
-  Serial.write("Hello World!");
-  
-
+  Serial.println("Dir1");
   digitalWrite(MOTOR_1A, HIGH);
   digitalWrite(MOTOR_2A, LOW);
-  
-  Serial.write("Hello World!");
-  delay(5000);
+  delay(1000);
+
+  Serial.println("Dir2");
   digitalWrite(MOTOR_1A, LOW);
   digitalWrite(MOTOR_2A, HIGH);
-  delay(5000);
+  delay(1000);
   
 
 
