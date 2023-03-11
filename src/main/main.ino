@@ -2,7 +2,6 @@
 // std includes
 #include <string>
 #include <memory>
-#include <time.h>
 
 // Internal includes
 #include "arduino_secrets.h"
@@ -41,7 +40,6 @@ void loop()
     lastSensed = clock();
   }
 
-<<<<<<< HEAD
   double runtime_diff_ms = (currentTime - lastSensed) * 1000. / CLOCKS_PER_SEC;
   
 
@@ -53,8 +51,6 @@ void loop()
     delay(1000);
   }
   
-=======
   //client->sendMessage("Hello World!");
   delay(1000);
->>>>>>> 55aabbb (MQTT connection working)
 }
