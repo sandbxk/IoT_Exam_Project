@@ -2,6 +2,7 @@
 // std includes
 #include <string>
 #include <memory>
+#include <time.h>
 
 // Internal includes
 #include "arduino_secrets.h"
@@ -18,9 +19,12 @@ Setting settings = Setting
 
 std::unique_ptr<Client> client = nullptr;
 
+#define MICROWAVE_SENSOR_PIN 0
+
 void setup() 
 {
   Serial.begin(9600);
+  pinMode(MICROWAVE_SENSOR_PIN, INPUT_PULLDOWN);
 
   client = std::make_unique<Client>(std::unique_ptr<Setting>(&settings));
   client->connect();
@@ -28,10 +32,24 @@ void setup()
 
 void loop() 
 {
-  if (client->pollIncoming()) {
-    Serial.println(client->getMessage().c_str());
+
+  clock_t lastSensed;
+  clock_t currentTime = clock();
+
+  if (lastSensed == NULL)
+  {
+    lastSensed = clock();
   }
 
-  client->sendMessage("Hello World!");
-  delay(1000);
+  double runtime_diff_ms = (currentTime - lastSensed) * 1000. / CLOCKS_PER_SEC;
+  
+
+  int microwaveSensorValue = digitalRead(MICROWAVE_SENSOR_PIN);
+
+  if (microwaveSensorValue == 1 && runtime_diff_ms > 5000) //Wait 5 seconds between sending a new MQTT message
+  {
+    client->sendMessage("open");
+    delay(1000);
+  }
+  
 }
