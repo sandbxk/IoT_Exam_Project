@@ -18,9 +18,15 @@ Setting settings = Setting
 
 std::unique_ptr<Client> client = nullptr;
 
+#define MOTOR_PIN1 0
+#define MOTOR_PIN2 14
+#define SPIN_DURATION 2000
+
 void setup() 
 {
   Serial.begin(9600);
+  pinMode(MOTOR_PIN1, OUTPUT);
+  pinMode(MOTOR_PIN2, OUTPUT);
 
   client = std::make_unique<Client>(std::unique_ptr<Setting>(&settings));
   client->connect();
@@ -28,10 +34,42 @@ void setup()
 
 void loop() 
 {
+  std::string msg;
+
   if (client->pollIncoming()) {
-    Serial.println(client->getMessage().c_str());
+    msg = client->getMessage().c_str();
   }
 
-  client->sendMessage("Hello World!");
+  if (msg == 'open')
+  {
+    spinMotor(true, SPIN_DURATION); //Spin clockwise for duration to open door
+    spinMotor(false, SPIN_DURATION); //Spin counter-clockwise for duration to reset position
+
+    client->sendMessage("door opened")
+  }
+  
   delay(1000);
+}
+
+
+void spinMotor(bool clockwise, int duration) {
+  if (clockwise) 
+  {
+    digitalWrite(MOTOR_PIN1, HIGH);
+    digitalWrite(MOTOR_PIN2, LOW);
+    delay(duration);
+    stopMotor()
+  }
+  else
+  {
+    digitalWrite(MOTOR_PIN1, LOW);
+    digitalWrite(MOTOR_PIN2, HIGH);
+    delay(duration);
+    stopMotor()
+  }
+}
+
+void stopMotor() {
+  digitalWrite(MOTOR_PIN1, LOW);
+  digitalWrite(MOTOR_PIN2, LOW);
 }
