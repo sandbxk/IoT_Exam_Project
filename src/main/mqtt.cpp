@@ -2,24 +2,21 @@
 #include <ArduinoMqttClient.h>
 
 
-Client::Client(std::unique_ptr<Setting> settings)
+IoT::Client::Client(Setting* settings)
 {
-    this->m_mqttClient = std::make_unique<MqttClient>(this->m_wifiClient);
+    this->m_mqttClient = new MqttClient(this->m_wifiClient);
     this->m_settings = std::move(settings);
 
     this->m_mqttClient->setId(this->m_settings->id().c_str());
     this->m_mqttClient->setUsernamePassword(this->m_settings->token().c_str(), "");
-
 }
 
-Client::~Client()
+IoT::Client::~Client()
 {
-    this->m_mqttClient.~unique_ptr();
-    this->m_settings.~unique_ptr();
     this->m_wifiClient.stop();
 }
 
-void Client::connect()
+void IoT::Client::connect()
 {
     #define WIFI_WAIT 2000
     WiFi.begin(this->m_settings->ssid().c_str());
@@ -45,41 +42,41 @@ void Client::connect()
     this->m_mqttClient->subscribe(this->m_settings->topic().c_str());
 }
 
-void Client::disconnect()
+void IoT::Client::disconnect()
 {
     this->m_wifiClient.stop();
     this->m_mqttClient->stop();
 }
 
-bool Client::pollIncoming()
+bool IoT::Client::pollIncoming()
 {
     auto len = this->m_mqttClient->parseMessage();
 
     if (len > 0) {  
-      std::unique_ptr<uint8_t> message = std::make_unique<uint8_t>(len + 1);
-      memset(message.get(), '\0', len + 1);
-      this->m_mqttClient->read(message.get(), len);
+      uint8_t* message = new uint8_t[len + 1];
+      memset(message, '\0', len + 1);
+      this->m_mqttClient->read(message, len);
 
-      this->m_messageQueue.push(std::string(reinterpret_cast<char*>(message.get())));
+      this->m_messageQueue.push(std::string(reinterpret_cast<char*>(message)));
       return true;
     }
 
     return false;
 }
 
-void Client::sendMessage(const std::string &message)
+void IoT::Client::sendMessage(const std::string &message)
 {
     this->sendMessage(message, this->m_settings->topic());
 }
 
-void Client::sendMessage(const std::string &message, const std::string &topic)
+void IoT::Client::sendMessage(const std::string &message, const std::string &topic)
 {
     this->m_mqttClient->beginMessage(topic.c_str());
     this->m_mqttClient->write(reinterpret_cast<const uint8_t*>(message.c_str()), message.length());
     this->m_mqttClient->endMessage();
 }
 
-std::string Client::getMessage()
+std::string IoT::Client::getMessage()
 { 
     auto message = this->m_messageQueue.front();
     this->m_messageQueue.pop();

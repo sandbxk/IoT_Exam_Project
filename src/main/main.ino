@@ -16,13 +16,13 @@ Setting settings = Setting
   WIFI_TIMEOUT, SECRET_FLESPI_TOKEN
 );
 
-std::unique_ptr<Client> client = nullptr;
+IoT::Client* client = nullptr;
 
 void setup() 
 {
   Serial.begin(9600);
 
-  client = std::make_unique<Client>(std::unique_ptr<Setting>(&settings));
+  client = new IoT::Client(new Setting(settings));
   client->connect();
 }
 
