@@ -9,11 +9,12 @@
 #include <WiFi.h>
 #include <ArduinoMqttClient.h>
 
+namespace IoT {
 
 class Client {
 
 public:
-    Client(std::unique_ptr<Setting> settings);
+    Client(Setting* settings);
     ~Client();
 
     void connect();
@@ -28,9 +29,11 @@ public:
 
 private:
 
-    std::unique_ptr<Setting> m_settings;
+    Setting* m_settings;
     WiFiClient m_wifiClient;
-    std::unique_ptr<MqttClient> m_mqttClient = nullptr;
+    MqttClient* m_mqttClient = nullptr;
     
     std::queue<std::string> m_messageQueue = std::queue<std::string>();
 };
+
+}

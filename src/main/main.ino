@@ -17,7 +17,7 @@ Setting settings = Setting
   WIFI_TIMEOUT, SECRET_FLESPI_TOKEN
 );
 
-std::unique_ptr<Client> client = nullptr;
+IoT::Client* client = nullptr;
 
 #define MICROWAVE_SENSOR_PIN 0
 
@@ -26,7 +26,7 @@ void setup()
   Serial.begin(9600);
   pinMode(MICROWAVE_SENSOR_PIN, INPUT_PULLDOWN);
 
-  client = std::make_unique<Client>(std::unique_ptr<Setting>(&settings));
+  client = new IoT::Client(new Setting(settings));
   client->connect();
 }
 
