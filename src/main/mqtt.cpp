@@ -1,5 +1,5 @@
 #include "mqtt.hpp"
-#include <ArduinoMqttClient.h>
+#include "ArduinoMqttClient.h"
 
 
 IoT::Client::Client(Setting* settings)
@@ -26,18 +26,23 @@ void IoT::Client::connect()
     size_t maxCounter = static_cast<size_t>(std::round(this->m_settings->wifi_timeout() / WIFI_WAIT));
     
     while (!WiFi.isConnected()) {
-        delay(WIFI_WAIT);
+        //delay(WIFI_WAIT);
         counter++;
         if (counter > maxCounter) {
-            ESP.restart();
+            Serial.println("WiFi connection failed!");
+            //ESP.restart();
         }
     }
+
+    Serial.println("Connected to WiFi.");
 
     if (!this->m_mqttClient->connect(this->m_settings->broker().c_str(), this->m_settings->port())) {
         Serial.print("MQTT connection failed! Error code = ");
         Serial.println(this->m_mqttClient->connectError());
-        ESP.restart();
+        //ESP.restart();
     }
+
+    Serial.println("Connected to MQTT broker.");
 
     this->m_mqttClient->subscribe(this->m_settings->topic().c_str());
 }

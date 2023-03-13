@@ -32,6 +32,6 @@ void loop()
     Serial.println(client->getMessage().c_str());
   }
 
-  client->sendMessage("Hello World!");
+  //client->sendMessage("Hello World!");
   delay(1000);
 }
