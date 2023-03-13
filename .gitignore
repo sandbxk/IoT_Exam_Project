@@ -1,4 +1,6 @@
 # Prerequisites
+API/bin/**
+API/obj/**
 *.d
 
 # Compiled Object files
