@@ -1,12 +1,10 @@
 
-// std includes
-#include <string>
-#include <memory>
-
-// Internal includes
-#include "arduino_secrets.h"
-#include "mqtt.hpp"
-#include "setting.hpp"
+#include <memory>                 // from C++ library
+#include "WString.h"              // from DFRobot esp32 library
+#include "arduino_secrets.h"      // from src/main/arduino_secrets.hpp
+#include "mqtt.hpp"               // from src/main/mqtt.hpp
+#include "motor.hpp"              // from src/main/motor.hpp
+#include "setting.hpp"            // from src/main/setting.hpp
 
 Setting settings = Setting
 (
@@ -16,12 +14,17 @@ Setting settings = Setting
   WIFI_TIMEOUT, SECRET_FLESPI_TOKEN
 );
 
+#define ENABLE_PIN 17
+#define D1_PIN 0
+#define D2_PIN 14
+
 IoT::Client* client = nullptr;
+IoT::Motor motor = IoT::Motor(ENABLE_PIN, D1_PIN, D2_PIN);
+
 
 void setup() 
 {
   Serial.begin(9600);
-
   client = new IoT::Client(new Setting(settings));
   client->connect();
 }
@@ -29,9 +32,19 @@ void setup()
 void loop() 
 {
   if (client->pollIncoming()) {
-    Serial.println(client->getMessage().c_str());
-  }
+    Serial.println(client->getMessage().payload().c_str());
 
-  //client->sendMessage("Hello World!");
-  delay(1000);
+    if (client->getMessage().topic() == "Motion Detected") {
+      motor.forward();
+      delay(2000); // todo: motor run until stop
+      client->sendMessage("opened");
+      motor.stop();
+    }
+    else if (client->getMessage().topic() == "close") {
+      motor.backward();
+      delay(2000); // todo: motor run until stop
+      client->sendMessage("opened");
+      motor.stop();
+    }
+  }
 }

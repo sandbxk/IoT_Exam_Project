@@ -1,15 +1,27 @@
 #pragma once
 
-#include "setting.hpp"
-
-#include <string>
-#include <memory>
-#include <queue>
-
-#include <WiFi.h>
-#include <ArduinoMqttClient.h>
+#include <queue>                    // from C++ library
+#include <WString.h>                // from DFRobot esp32 library
+#include <WiFi.h>                   // from DFRobot esp32 library
+#include <ArduinoMqttClient.h>      // from Arduino library 
+#include "setting.hpp"              // from src/main/setting.hpp
 
 namespace IoT {
+
+struct Message {
+public:
+    Message(const String& payload, const String& topic) : 
+    m_payload(payload), m_topic(topic) {};
+
+    ~Message() {};
+
+    String payload() const { return this->m_payload; }
+    String topic() const { return this->m_topic; }
+
+private:
+    String m_payload;
+    String m_topic;
+};
 
 class Client {
 
@@ -21,11 +33,12 @@ public:
     void disconnect();
 
     bool pollIncoming();
-    void sendMessage(const std::string& message);
-    void sendMessage(const std::string& message, const std::string& topic);
+    void sendMessage(const String& message);
+    void sendMessage(const String& message, const String& topic);
+    void sendMessage(const Message& message);
 
     bool hasMessage() const { return !this->m_messageQueue.empty(); }
-    std::string getMessage();
+    Message getMessage();
 
 private:
 
@@ -33,7 +46,7 @@ private:
     WiFiClient m_wifiClient;
     MqttClient* m_mqttClient = nullptr;
     
-    std::queue<std::string> m_messageQueue = std::queue<std::string>();
+    std::queue<Message> m_messageQueue = std::queue<Message>();
 };
 
 }
