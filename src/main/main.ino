@@ -21,30 +21,36 @@ Setting settings = Setting
 IoT::Client* client = nullptr;
 IoT::Motor motor = IoT::Motor(ENABLE_PIN, D1_PIN, D2_PIN);
 
-
-void setup() 
+void setup()
 {
   Serial.begin(9600);
   client = new IoT::Client(new Setting(settings));
+  
   client->connect();
+
+  client->subscribe(MQTT_DEFAULT_TOPIC);
+  client->subscribe("door/open");
+  client->subscribe("door/close");
 }
 
-void loop() 
+void loop()
 {
   if (client->pollIncoming()) {
     Serial.println(client->getMessage().payload().c_str());
 
-    if (client->getMessage().topic() == "Motion Detected") {
+    if (client->getMessage().topic() == "door/open") {
       motor.forward();
-      delay(2000); // todo: motor run until stop
-      client->sendMessage("opened");
+      delay(2000); // todo: motor run until trigger
       motor.stop();
+      
+      client->sendMessage("opened");
     }
-    else if (client->getMessage().topic() == "close") {
+    else if (client->getMessage().topic() == "door/close") {
       motor.backward();
-      delay(2000); // todo: motor run until stop
-      client->sendMessage("opened");
+      delay(2000); // todo: motor run until trigger
       motor.stop();
+
+      client->sendMessage("opened");
     }
   }
 }

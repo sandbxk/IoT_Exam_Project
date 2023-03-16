@@ -32,6 +32,8 @@ public:
     void connect();
     void disconnect();
 
+    void subscribe(const String& topic);
+
     bool pollIncoming();
     void sendMessage(const String& message);
     void sendMessage(const String& message, const String& topic);

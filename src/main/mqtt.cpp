@@ -49,15 +49,17 @@ void IoT::Client::connect()
     }
 
     Serial.println("Connected to MQTT broker.");
-
-    /// subscribe to the default topic
-    this->m_mqttClient->subscribe(this->m_settings->topic().c_str());
 }
 
 void IoT::Client::disconnect()
 {
     this->m_mqttClient->stop(); /// tell the broker we're disconnecting
     this->m_wifiClient.stop(); /// disconnect wifi
+}
+
+void IoT::Client::subscribe(const String &topic)
+{
+    this->m_mqttClient->subscribe(topic.c_str());
 }
 
 bool IoT::Client::pollIncoming()
