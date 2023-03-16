@@ -20,18 +20,18 @@ void IoT::Client::connect()
 {
     #define WIFI_WAIT 2000
     WiFi.begin(this->m_settings->ssid().c_str());
-    size_t counter;
-
-    // well defined double -> size_t conversion
-    size_t maxCounter = static_cast<size_t>(std::round(this->m_settings->wifi_timeout() / WIFI_WAIT));
+    int counter = 0;
+    int maxCounter = 8;
     
     while (!WiFi.isConnected()) {
-        //delay(WIFI_WAIT);
-        counter++;
-        if (counter > maxCounter) {
-            Serial.println("WiFi connection failed!");
-            //ESP.restart();
-        }
+        if (counter < maxCounter) {
+            Serial.println("Attempting to connect...");
+            counter++;
+            delay(1000);
+        } else if (counter == maxCounter) {
+            Serial.println("WiFi connection failed! Restarting...");
+            ESP.restart();
+        };
     }
 
     Serial.println("Connected to WiFi.");
