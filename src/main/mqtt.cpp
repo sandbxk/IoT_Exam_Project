@@ -2,6 +2,7 @@
 #include "ArduinoMqttClient.h"
 
 
+
 IoT::Client::Client(Setting* settings)
 {
     this->m_mqttClient = new MqttClient(this->m_wifiClient);
@@ -22,6 +23,10 @@ void IoT::Client::connect()
     WiFi.begin(this->m_settings->ssid().c_str());
     int counter = 0;
     int maxCounter = 8;
+    int networks = WiFi.scanNetworks();
+
+    Serial.println(networks);
+
     
     while (!WiFi.isConnected()) {
         if (counter < maxCounter) {

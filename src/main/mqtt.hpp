@@ -27,11 +27,12 @@ public:
     bool hasMessage() const { return !this->m_messageQueue.empty(); }
     std::string getMessage();
 
+    MqttClient* m_mqttClient = nullptr;
+
 private:
 
     Setting* m_settings;
     WiFiClient m_wifiClient;
-    MqttClient* m_mqttClient = nullptr;
     
     std::queue<std::string> m_messageQueue = std::queue<std::string>();
 };
