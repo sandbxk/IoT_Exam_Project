@@ -65,8 +65,7 @@ void loop()
 
   if (MOTION_SENSOR_OUTPUT == 1 && MOTION_DETECTED == 0)
   {
-    client->sendMessage("Motion Detected", "motiondetector");
-    client->sendMessage("OPEN SESSAMY", "door/open");
+    client->sendMessage("Motion Detected", "door/open");
     Serial.println("MOVEMENT DETECTED");
     MOTION_DETECTED = 1;
     digitalWrite(ONBOARD_LED, HIGH);
@@ -76,6 +75,7 @@ void loop()
   {
     MOTION_DETECTED = 0;
     Serial.println("NO MOVEMENT");
+    client->sendMessage("No Movement", "door/close");
     digitalWrite(ONBOARD_LED, LOW);
     delay(1000);
   }
