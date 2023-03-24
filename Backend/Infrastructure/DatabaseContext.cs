@@ -18,4 +18,5 @@ public class DatabaseContext : DbContext
             .Property(m => m.Id)
             .ValueGeneratedOnAdd();
     }
+    public DbSet<Mqtt> MqttTable { get; set; }
 }
