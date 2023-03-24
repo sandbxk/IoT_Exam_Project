@@ -9,7 +9,12 @@
 #include "mqtt.hpp"
 #include "setting.hpp"
 
-Adafruit_NeoPixel onboardLED = Adafruit_NeoPixel(1, BUILTIN_LED, NEO_GRB + NEO_KHZ800);
+#define DATA_PIN 5
+#define NUM_LEDS 1
+
+Adafruit_NeoPixel onboardLED = Adafruit_NeoPixel(1, BUILTIN_LED);
+Adafruit_NeoPixel onboardMagic = Adafruit_NeoPixel(1, DATA_PIN, NEO_GRB + NEO_KHZ800);
+
 
 int MOTION_SENSOR_PIN = 0;
 int MOTION_SENSOR_OUTPUT = 0; 
@@ -28,17 +33,28 @@ IoT::Client* client = nullptr;
 #define MICROWAVE_SENSOR_PIN 0
 #define ONBOARD_LED BUILTIN_LED
 
+
+void setColor(u8_t r, u8_t g, u8_t b) {
+  onboardMagic.clear();
+  onboardMagic.setPixelColor(0, onboardMagic.Color(r, g, b));
+  onboardMagic.show();
+}
+
 void setup() 
 {
   Serial.begin(9600);
   pinMode(MICROWAVE_SENSOR_PIN, INPUT_PULLDOWN);
   pinMode(ONBOARD_LED, OUTPUT);
+  pinMode(DATA_PIN, OUTPUT);
+  onboardMagic.begin();
+  onboardMagic.setBrightness(5);
+  setColor(255, 0, 0);
 
   client = new IoT::Client(new Setting(settings));
   client->connect();
 
-  pinMode(MOTION_SENSOR_PIN, INPUT_PULLDOWN);
   onboardLED.begin();
+  pinMode(MOTION_SENSOR_PIN, INPUT_PULLDOWN);
   WiFi.setSleep(false);
 }
 
@@ -49,6 +65,7 @@ void loop()
     Serial.println("WiFi not connected");
     client->connect();
     Serial.println("WiFi connected");
+    setColor(255, 0, 255);
   }
 
   if (!client->m_mqttClient->connected())
@@ -56,10 +73,12 @@ void loop()
     Serial.println("MQTT not connected");
     client->connect();
     Serial.println("MQTT connected");
+    setColor(255, 255, 0);
   }
 
   onboardLED.setPixelColor(0, onboardLED.Color(0, 0, 255));
   onboardLED.show();
+  setColor(0, 250, 0);
 
   MOTION_SENSOR_OUTPUT = digitalRead(MOTION_SENSOR_PIN);
 
@@ -69,6 +88,7 @@ void loop()
     Serial.println("MOVEMENT DETECTED");
     MOTION_DETECTED = 1;
     digitalWrite(ONBOARD_LED, HIGH);
+    setColor(0, 0, 250);
     delay(1000);
   }
   else if (MOTION_SENSOR_OUTPUT == 0 && MOTION_DETECTED == 1)
@@ -77,6 +97,7 @@ void loop()
     Serial.println("NO MOVEMENT");
     client->sendMessage("No Movement", "door/close");
     digitalWrite(ONBOARD_LED, LOW);
+    setColor(0, 250, 0);
     delay(1000);
   }
 }
