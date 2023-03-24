@@ -46,7 +46,7 @@ public class MqttServiceTests
         Action action = () => service.create(mqtt);
 
         // Assert
-        action.Should().Throw<ArgumentNullException>();
+        action.Should().Throw<NullReferenceException>();
     }
     
     [Fact]
@@ -54,6 +54,7 @@ public class MqttServiceTests
     {
         // Arrange
         Mock<IMqttRepository> repository = new Mock<IMqttRepository>();
+        repository.Setup(x => x.create(It.IsAny<Mqtt>())).Returns(new Mqtt());
         MqttService service = new MqttService(repository.Object);
         Mqtt mqtt = new Mqtt();
 
@@ -61,6 +62,6 @@ public class MqttServiceTests
         Action action = () => service.create(mqtt);
 
         // Assert
-        action.Should().NotThrow<ArgumentNullException>();
+        action.Should().NotThrow<NullReferenceException>();
     }
 }

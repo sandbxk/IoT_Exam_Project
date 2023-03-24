@@ -15,7 +15,19 @@ public class MqttService : IMqttService
 
     public Mqtt create(Mqtt mqtt)
     {
-        throw new NotImplementedException();
+        if (mqtt == null)
+        {
+            throw new NullReferenceException();
+        }
+        
+        Mqtt returnMqtt = _repository.create(mqtt);
+        
+        if (returnMqtt == null)
+        {
+            throw new NullReferenceException();
+        }
+        
+        return returnMqtt;
     }
 
     public List<Mqtt> readAll()
