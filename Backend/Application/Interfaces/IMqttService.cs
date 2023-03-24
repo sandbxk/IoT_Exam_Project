@@ -8,6 +8,6 @@ public interface IMqttService
     public List<Mqtt> readAll();
     public Mqtt read(int id);
     public Mqtt update(Mqtt mqtt);
-    public Boolean delete(int id);
+    public Boolean delete(Mqtt mqtt);
     
 }

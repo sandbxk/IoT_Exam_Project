@@ -44,7 +44,19 @@ public class MqttService : IMqttService
 
     public Mqtt read(int id)
     {
-        throw new NotImplementedException();
+        if (id <= 0)
+        {
+            throw new ArgumentOutOfRangeException();
+        }
+        
+        Mqtt returnMqtt = _repository.read(id);
+        
+        if (returnMqtt == null)
+        {
+            throw new NullReferenceException();
+        }
+
+        return returnMqtt;
     }
 
     public Mqtt update(Mqtt mqtt)
@@ -52,8 +64,24 @@ public class MqttService : IMqttService
         throw new NotImplementedException();
     }
 
-    public bool delete(int id)
+    public bool delete(Mqtt mqtt)
     {
-        throw new NotImplementedException();
+        if (mqtt == null)
+        {
+            throw new NullReferenceException();
+        }
+        
+        if (mqtt.Id <= 0)
+        {
+            throw new ArgumentOutOfRangeException();
+        }
+        
+        int returnInt = _repository.delete(mqtt.Id);
+        
+        if (returnInt == 0)
+        {
+            return false;
+        }
+        return true;
     }
 }

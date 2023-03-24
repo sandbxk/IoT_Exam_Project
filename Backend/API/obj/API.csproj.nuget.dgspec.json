@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\api\\API.csproj": {}
+    "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\API\\API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\api\\API.csproj": {
+    "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\api\\API.csproj",
+        "projectUniqueName": "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\api\\API.csproj",
+        "projectPath": "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\API\\API.csproj",
         "packagesPath": "C:\\Users\\Kish\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\api\\obj\\",
+        "outputPath": "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Kish\\AppData\\Roaming\\NuGet\\NuGet.Config"

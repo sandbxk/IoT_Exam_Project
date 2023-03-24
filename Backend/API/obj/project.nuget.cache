@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "O54YfvV1Hj1aooqPNqkRl+SzyNODKf9gNpEV4P9NS/tD0lHVzxkiJwuedlG/GcOW4ATBhjSu8bhAtVxrBSZrYg==",
+  "dgSpecHash": "FaVuNUq2UtLXkekANbFHt2FuuxJtFcz0JVBrpqWtja7bqmr4ZGjWbHDVuSjNgv1MTQ/CFlyiYj7DVRVkaSFW0g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\api\\API.csproj",
+  "projectFilePath": "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Kish\\.nuget\\packages\\microsoft.data.sqlite.core\\8.0.0-preview.2.23128.3\\microsoft.data.sqlite.core.8.0.0-preview.2.23128.3.nupkg.sha512",
     "C:\\Users\\Kish\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.0-preview.2.23128.3\\microsoft.entityframeworkcore.8.0.0-preview.2.23128.3.nupkg.sha512",
