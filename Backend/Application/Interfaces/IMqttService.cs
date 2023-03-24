@@ -1,6 +1,6 @@
 ﻿namespace Application.Interfaces;
 
-public interface IPlaceHolderName
+public interface IMqttService
 {
     
 }

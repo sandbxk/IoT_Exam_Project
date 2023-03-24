@@ -19,7 +19,7 @@ namespace Application
     {    
         private readonly ManagedMqttClient _client;
 
-        protected CancellationTokenSource AsyncTokenSource { get; } = new CancellationTokenSource();
+        protected CancellationTokenSource AsyncTokenSource { get; } = new ();
         
         public AMqttClient()
         {
