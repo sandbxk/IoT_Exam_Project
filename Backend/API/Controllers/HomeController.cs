@@ -16,7 +16,7 @@ public class HomeController : ControllerBase
     
     [Route("{id}")]
     [HttpGet]
-    public ActionResult<Mqtt> Get([FromBody] int id)
+    public ActionResult<Mqtt> Get([FromRoute] int id)
     {
         return _mqttService.read(id);
     }
@@ -34,9 +34,9 @@ public class HomeController : ControllerBase
     }
     
     [HttpDelete]
-    public ActionResult<Boolean> Delete([FromBody] int id)
+    public ActionResult<Boolean> Delete([FromBody] Mqtt mqtt)
     {
-        return _mqttService.delete(id);
+        return _mqttService.delete(mqtt);
     }
     
     [HttpPut]
