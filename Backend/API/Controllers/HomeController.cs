@@ -1,7 +1,6 @@
 ﻿using Application.Interfaces;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
-using MQTTnet.Server;
 
 namespace API.Controllers;
 

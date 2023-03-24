@@ -113,3 +113,5 @@ C:\Users\Kish\Documents\GitHub\IoT_Exam_Project\Backend\Tests\obj\Debug\net6.0\r
 C:\Users\Kish\Documents\GitHub\IoT_Exam_Project\Backend\Tests\obj\Debug\net6.0\Tests.pdb
 C:\Users\Kish\Documents\GitHub\IoT_Exam_Project\Backend\Tests\obj\Debug\net6.0\Tests.genruntimeconfig.cache
 C:\Users\Kish\Documents\GitHub\IoT_Exam_Project\Backend\Tests\obj\Debug\net6.0\ref\Tests.dll
+C:\Users\Kish\Documents\GitHub\IoT_Exam_Project\Backend\Tests\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Kish\Documents\GitHub\IoT_Exam_Project\Backend\Tests\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
