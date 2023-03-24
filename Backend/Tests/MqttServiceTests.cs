@@ -4,7 +4,7 @@ using FluentAssertions;
 
 namespace Tests;
 
-public class UnitTest1
+public class MqttServiceTests
 {
     [Fact]
     public void MQTTService_WithNullAsRepository_ShouldThrowNullException()

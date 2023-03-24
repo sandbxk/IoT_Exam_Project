@@ -12,5 +12,10 @@ public class DatabaseContext : DbContext
         //Setting Primary Keys
         modelBuilder.Entity<Mqtt>()
             .HasKey(m => m.Id);
+        
+        //Auto ID generation
+        modelBuilder.Entity<Mqtt>()
+            .Property(m => m.Id)
+            .ValueGeneratedOnAdd();
     }
 }

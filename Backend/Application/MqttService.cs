@@ -1,8 +1,9 @@
 ﻿using Application.Interfaces;
+using Domain;
 
 namespace Application;
 
-public class MqttService
+public class MqttService : IMqttService
 {
     private readonly IMqttRepository _repository;
 

@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "KjEaSZIYHoqbc7ULnXHatRugVjuJn3FxnZK9tkUP6jQAUP0hZ48a/ZM4xzvKr9qOQPtqpio2kiR9MNQILNS8uQ==",
+  "dgSpecHash": "ETDf94t7njlTjYZ7Hq0m8Dy6wtS1s73oNbaWA6Rs1AZljhO4MY1/vz/zwyqY206IrUSCGNv2W1RFR7tgDLaO8g==",
   "success": true,
   "projectFilePath": "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\Application\\Application.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Kish\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\8.0.0-preview.2.23128.3\\microsoft.extensions.dependencyinjection.8.0.0-preview.2.23128.3.nupkg.sha512",
+    "C:\\Users\\Kish\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0-preview.2.23128.3\\microsoft.extensions.dependencyinjection.abstractions.8.0.0-preview.2.23128.3.nupkg.sha512",
     "C:\\Users\\Kish\\.nuget\\packages\\mqttnet\\4.1.4.563\\mqttnet.4.1.4.563.nupkg.sha512",
     "C:\\Users\\Kish\\.nuget\\packages\\mqttnet.extensions.managedclient\\4.1.4.563\\mqttnet.extensions.managedclient.4.1.4.563.nupkg.sha512"
   ],

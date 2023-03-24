@@ -552,7 +552,8 @@
         "dependencies": {
           "Domain": "1.0.0",
           "MQTTnet": "4.1.4.563",
-          "MQTTnet.Extensions.ManagedClient": "4.1.4.563"
+          "MQTTnet.Extensions.ManagedClient": "4.1.4.563",
+          "Microsoft.Extensions.DependencyInjection": "8.0.0-preview.2.23128.3"
         },
         "compile": {
           "bin/placeholder/Application.dll": {}
@@ -1337,7 +1338,8 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "Application >= 1.0.0",
-      "Microsoft.EntityFrameworkCore.Sqlite >= 8.0.0-preview.2.23128.3"
+      "Microsoft.EntityFrameworkCore.Sqlite >= 8.0.0-preview.2.23128.3",
+      "Microsoft.Extensions.DependencyInjection >= 8.0.0-preview.2.23128.3"
     ]
   },
   "packageFolders": {
@@ -1382,6 +1384,10 @@
         "targetAlias": "net6.0",
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Sqlite": {
+            "target": "Package",
+            "version": "[8.0.0-preview.2.23128.3, )"
+          },
+          "Microsoft.Extensions.DependencyInjection": {
             "target": "Package",
             "version": "[8.0.0-preview.2.23128.3, )"
           }

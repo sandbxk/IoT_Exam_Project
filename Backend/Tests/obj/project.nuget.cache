@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "LpTAlUrvik7moX/fCxTXxhyly9s0XeycRB9rEf+aroUjBrt8H6YnCvNTvG+7l+i/5yI/GxSSvWI2Na5eTFcZfw==",
+  "dgSpecHash": "cnwy5+WQ3Lumbo6FnQHe5TnXETOpo47JH5sPscNsUKihC/zcDITB/AAnYyA5YIQ7ZXHk7znwmlgiF2LArrC99Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\Tests\\Tests.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,8 @@
     "C:\\Users\\Kish\\.nuget\\packages\\fluentassertions\\6.10.0\\fluentassertions.6.10.0.nupkg.sha512",
     "C:\\Users\\Kish\\.nuget\\packages\\microsoft.codecoverage\\17.1.0\\microsoft.codecoverage.17.1.0.nupkg.sha512",
     "C:\\Users\\Kish\\.nuget\\packages\\microsoft.csharp\\4.0.1\\microsoft.csharp.4.0.1.nupkg.sha512",
+    "C:\\Users\\Kish\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\8.0.0-preview.2.23128.3\\microsoft.extensions.dependencyinjection.8.0.0-preview.2.23128.3.nupkg.sha512",
+    "C:\\Users\\Kish\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0-preview.2.23128.3\\microsoft.extensions.dependencyinjection.abstractions.8.0.0-preview.2.23128.3.nupkg.sha512",
     "C:\\Users\\Kish\\.nuget\\packages\\microsoft.net.test.sdk\\17.1.0\\microsoft.net.test.sdk.17.1.0.nupkg.sha512",
     "C:\\Users\\Kish\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\Kish\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\API\\API.csproj": {}
+    "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\api\\API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\API\\API.csproj": {
+    "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\api\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\API\\API.csproj",
+        "projectUniqueName": "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\api\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\API\\API.csproj",
+        "projectPath": "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\api\\API.csproj",
         "packagesPath": "C:\\Users\\Kish\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\API\\obj\\",
+        "outputPath": "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Kish\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -28,6 +28,9 @@
             "projectReferences": {
               "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\Application\\Application.csproj": {
                 "projectPath": "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\Application\\Application.csproj"
+              },
+              "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\Infrastructure\\Infrastructure.csproj"
               }
             }
           }
@@ -115,6 +118,10 @@
             "MQTTnet.Extensions.ManagedClient": {
               "target": "Package",
               "version": "[4.1.4.563, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.0.0-preview.2.23128.3, )"
             }
           },
           "imports": [
@@ -170,6 +177,73 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\Infrastructure\\Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\Infrastructure\\Infrastructure.csproj",
+        "projectName": "Infrastructure",
+        "projectPath": "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\Infrastructure\\Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\Kish\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\Infrastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Kish\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\Application\\Application.csproj": {
+                "projectPath": "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\Application\\Application.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[8.0.0-preview.2.23128.3, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.0.0-preview.2.23128.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

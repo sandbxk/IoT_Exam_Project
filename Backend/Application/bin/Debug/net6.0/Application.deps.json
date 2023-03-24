@@ -10,10 +10,30 @@
         "dependencies": {
           "Domain": "1.0.0",
           "MQTTnet": "4.1.4.563",
-          "MQTTnet.Extensions.ManagedClient": "4.1.4.563"
+          "MQTTnet.Extensions.ManagedClient": "4.1.4.563",
+          "Microsoft.Extensions.DependencyInjection": "8.0.0-preview.2.23128.3"
         },
         "runtime": {
           "Application.dll": {}
+        }
+      },
+      "Microsoft.Extensions.DependencyInjection/8.0.0-preview.2.23128.3": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0-preview.2.23128.3"
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.Extensions.DependencyInjection.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.23.12803"
+          }
+        }
+      },
+      "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.0-preview.2.23128.3": {
+        "runtime": {
+          "lib/net6.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.23.12803"
+          }
         }
       },
       "MQTTnet/4.1.4.563": {
@@ -47,6 +67,20 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Microsoft.Extensions.DependencyInjection/8.0.0-preview.2.23128.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pucB/ZmJDQb6EJ2TwQs8ZTXOPIZFO0YjVSKuo1AkDOqxsRc70OmQ3egbVPUAC+PmtuJeietTACeNgDPqYGgH8A==",
+      "path": "microsoft.extensions.dependencyinjection/8.0.0-preview.2.23128.3",
+      "hashPath": "microsoft.extensions.dependencyinjection.8.0.0-preview.2.23128.3.nupkg.sha512"
+    },
+    "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.0-preview.2.23128.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-BchUPkH1mMDCdG/lVP4VvYs4UmAY3WbSehaPBqFNcBdf1bPwuwpHJwDGRY3jn6ltHyqh2xEG/lewZNqm2TE5Kg==",
+      "path": "microsoft.extensions.dependencyinjection.abstractions/8.0.0-preview.2.23128.3",
+      "hashPath": "microsoft.extensions.dependencyinjection.abstractions.8.0.0-preview.2.23128.3.nupkg.sha512"
     },
     "MQTTnet/4.1.4.563": {
       "type": "package",
