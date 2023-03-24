@@ -32,7 +32,14 @@ public class MqttService : IMqttService
 
     public List<Mqtt> readAll()
     {
-        throw new NotImplementedException();
+        List<Mqtt> mqttList = _repository.readAll();
+        
+        if (mqttList == null)
+        {
+            throw new NullReferenceException();
+        }
+
+        return mqttList;
     }
 
     public Mqtt read(int id)

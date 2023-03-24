@@ -64,4 +64,35 @@ public class MqttServiceTests
         // Assert
         action.Should().NotThrow<NullReferenceException>();
     }
+    
+    [Fact]
+    public void Create_WithMqtt_ShouldReturnMqtt()
+    {
+        // Arrange
+        Mock<IMqttRepository> repository = new Mock<IMqttRepository>();
+        repository.Setup(x => x.create(It.IsAny<Mqtt>())).Returns(new Mqtt());
+        MqttService service = new MqttService(repository.Object);
+        Mqtt mqtt = new Mqtt();
+
+        // Act
+        Mqtt returnMqtt = service.create(mqtt);
+
+        // Assert
+        returnMqtt.Should().BeOfType<Mqtt>();
+    }
+    
+    [Fact]
+    public void ReadAll_WithNullAsMqttList_ShouldThrowNullException()
+    {
+        // Arrange
+        Mock<IMqttRepository> repository = new Mock<IMqttRepository>();
+        repository.Setup(x => x.readAll()).Returns((List<Mqtt>) null);
+        MqttService service = new MqttService(repository.Object);
+
+        // Act
+        Action action = () => service.readAll();
+
+        // Assert
+        action.Should().Throw<NullReferenceException>();
+    }
 }
