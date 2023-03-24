@@ -12,43 +12,51 @@ IoT::Client::Client(Setting* settings)
 
 IoT::Client::~Client()
 {
-    this->m_wifiClient.stop(); /// this is not necessary, but it's good practice
-
-    /// free memory allocated by new operator
+    this->m_wifiClient.stop();
     delete this->m_mqttClient;
     delete this->m_settings;
-
-    /// queue is automatically deleted (RAII) - stack allocated
-    /// wifiClient is automatically deleted (RAII) - stack allocated
 }
 
-void IoT::Client::connect()
-{
-    #define WIFI_WAIT 2000
-    WiFi.begin(this->m_settings->ssid().c_str());
-    size_t counter;
+bool connectWifi(const char* ssid) {
+    if (WiFi.isConnected()) { return true; }
 
-    /// well defined double -> size_t conversion
-    size_t maxCounter = static_cast<size_t>(std::round(this->m_settings->wifi_timeout() / WIFI_WAIT));
+    WiFi.begin(ssid);
+    size_t counter;
+    size_t maxCounter = 5;
     
     while (!WiFi.isConnected()) {
-        //delay(WIFI_WAIT);
+        delay(2000);
         counter++;
         if (counter > maxCounter) {
-            Serial.println("WiFi connection failed!");
-            //ESP.restart();
+            return false;
         }
     }
 
     Serial.println("Connected to WiFi.");
 
+    return true;
+}
+
+void IoT::Client::connect()
+{
+    if (!connectWifi(this->m_settings->ssid().c_str()))
+    {
+        Serial.println("Failed to connect to WiFi.");
+        this->connect();
+    }
+
     if (!this->m_mqttClient->connect(this->m_settings->broker().c_str(), this->m_settings->port())) {
         Serial.print("MQTT connection failed! Error code = ");
         Serial.println(this->m_mqttClient->connectError());
-        //ESP.restart();
     }
 
     Serial.println("Connected to MQTT broker.");
+
+    // incase we reconnect, we need to resubscribe to all the topics
+    for (auto topic : this->m_subscribedTopics)
+    {
+        this->subscribe(topic);
+    }
 }
 
 void IoT::Client::disconnect()
@@ -59,7 +67,33 @@ void IoT::Client::disconnect()
 
 void IoT::Client::subscribe(const String &topic)
 {
-    this->m_mqttClient->subscribe(topic.c_str());
+    if (this->m_mqttClient->subscribe(topic.c_str()))
+    {
+        this->m_subscribedTopics.push_back(topic);
+        Serial.print("Subscribed to topic: ");
+        Serial.println(topic);
+    }
+    else
+    {
+        Serial.print("Failed to subscribe to topic: ");
+        Serial.println(topic);
+    }
+}
+
+void IoT::Client::unsubscribe(const String &topic)
+{
+    if (this->m_mqttClient->unsubscribe(topic.c_str()))
+    {
+        // vector erase-remove idiom
+        this->m_subscribedTopics.erase(std::remove(this->m_subscribedTopics.begin(), this->m_subscribedTopics.end(), topic), this->m_subscribedTopics.end());
+        Serial.print("Unsubscribed from topic: ");
+        Serial.println(topic);
+    }
+    else
+    {
+        Serial.print("Failed to unsubscribe from topic: ");
+        Serial.println(topic);
+    }
 }
 
 bool IoT::Client::pollIncoming()
@@ -69,20 +103,16 @@ bool IoT::Client::pollIncoming()
 
     if (len > 0) 
     {
-        /// allocate memory for the message
-        uint8_t* message = new uint8_t[len + 1];
-        memset(message, '\0', len + 1);
+        Serial.print("Message arrived [");
+        Serial.print(this->m_mqttClient->messageTopic());
+        Serial.print("]: ");
 
-        /// read the message into the buffer 
-        this->m_mqttClient->read(message, len);
-        
         /// push the message into the queue (copy)
         this->m_messageQueue.push(Message(
-            String(reinterpret_cast<char*>(message)), 
+            this->m_mqttClient->readString(),
             this->m_mqttClient->messageTopic()
         ));
 
-        /// scope ends, memory is automatically freed (RAII - new operator)
         return true;
     }
 
@@ -92,7 +122,7 @@ bool IoT::Client::pollIncoming()
 void IoT::Client::sendMessage(const String &message, const String &topic)
 {
     this->m_mqttClient->beginMessage(topic.c_str());
-    this->m_mqttClient->write(reinterpret_cast<const uint8_t*>(message.c_str()), message.length());
+    this->m_mqttClient->write((reinterpret_cast<const uint8_t*>(message.c_str()), message.length()));
     this->m_mqttClient->endMessage();
 }
 

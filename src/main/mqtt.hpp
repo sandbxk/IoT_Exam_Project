@@ -1,6 +1,8 @@
 #pragma once
 
 #include <queue>                    // from C++ library
+#include <vector>                   // from C++ library
+
 #include <WString.h>                // from DFRobot esp32 library
 #include <WiFi.h>                   // from DFRobot esp32 library
 #include <ArduinoMqttClient.h>      // from Arduino library 
@@ -33,12 +35,17 @@ public:
     void disconnect();
 
     void subscribe(const String& topic);
+    void unsubscribe(const String& topic);
 
     bool pollIncoming();
     void sendMessage(const String& message);
     void sendMessage(const String& message, const String& topic);
     void sendMessage(const Message& message);
 
+    bool isMqttConnected() const { return this->m_mqttClient->connected(); }
+    bool isWifiConnected() const { return WiFi.status() == WL_CONNECTED; }
+
+    bool isConnected() const { return this->isMqttConnected() && this->isWifiConnected(); }
     bool hasMessage() const { return !this->m_messageQueue.empty(); }
     Message getMessage();
 
@@ -49,6 +56,7 @@ private:
     MqttClient* m_mqttClient = nullptr;
     
     std::queue<Message> m_messageQueue = std::queue<Message>();
+    std::vector<String> m_subscribedTopics = std::vector<String>();
 };
 
 }

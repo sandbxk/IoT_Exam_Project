@@ -2,9 +2,9 @@
 #include <memory>                 // from C++ library
 #include "WString.h"              // from DFRobot esp32 library
 #include "arduino_secrets.h"      // from src/main/arduino_secrets.hpp
+#include "setting.hpp"            // from src/main/setting.hpp
 #include "mqtt.hpp"               // from src/main/mqtt.hpp
 #include "motor.hpp"              // from src/main/motor.hpp
-#include "setting.hpp"            // from src/main/setting.hpp
 
 Setting settings = Setting
 (
@@ -14,43 +14,51 @@ Setting settings = Setting
   WIFI_TIMEOUT, SECRET_FLESPI_TOKEN
 );
 
-#define ENABLE_PIN 17
+#define PWM1 16
+#define PWM2 17
+
 #define D1_PIN 0
 #define D2_PIN 14
 
-IoT::Client* client = nullptr;
-IoT::Motor motor = IoT::Motor(ENABLE_PIN, D1_PIN, D2_PIN);
+IoT::Client* mqttClient = new IoT::Client(&settings);
+IoT::Motor* motor = new IoT::Motor(PWM1, PWM2, D1_PIN, D2_PIN);
 
 void setup()
 {
   Serial.begin(9600);
-  client = new IoT::Client(new Setting(settings));
   
-  client->connect();
+  mqttClient->connect();
+  mqttClient->subscribe("door/open");
+  mqttClient->subscribe("door/close");
 
-  client->subscribe(MQTT_DEFAULT_TOPIC);
-  client->subscribe("door/open");
-  client->subscribe("door/close");
+  motor->setSpeed(100); // 0 -> 255
 }
 
 void loop()
 {
-  if (client->pollIncoming()) {
-    Serial.println(client->getMessage().payload().c_str());
+  if (mqttClient->isConnected()) 
+  {
+    mqttClient->pollIncoming();
 
-    if (client->getMessage().topic() == "door/open") {
-      motor.forward();
-      delay(2000); // todo: motor run until trigger
-      motor.stop();
+    if (mqttClient->hasMessage()) {
+      auto message = mqttClient->getMessage();
       
-      client->sendMessage("opened");
-    }
-    else if (client->getMessage().topic() == "door/close") {
-      motor.backward();
-      delay(2000); // todo: motor run until trigger
-      motor.stop();
-
-      client->sendMessage("opened");
+      if (message.topic() == "door/open") {
+        motor->forward();
+        delay(2000); // todo: motor run until trigger
+        motor->stop();      
+      }
+      else if (message.topic() == "door/close") {
+        motor->backward();
+        delay(2000); // todo: motor run until trigger
+        motor->stop();
+      }
     }
   }
+  else 
+  {
+    Serial.println("Reconnecting...");
+    mqttClient->connect();
+  }
 }
+
