@@ -1,4 +1,4 @@
-#define SECRET_SSID "mb_hotspot"
+#define SECRET_SSID "Kish"
 #define SECRET_PASS ""
 #define SECRET_FLESPI_TOKEN "aUyHo41Wh8ntnkHNX0ejOPv4WmyE2RU1AgwOalyhjLyxV68HWdQyS9sClR6cwO3W"
 
