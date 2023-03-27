@@ -1,4 +1,4 @@
-#define SECRET_SSID "Dumtnet"
+#define SECRET_SSID "Kish"
 #define SECRET_PASS ""
 #define SECRET_FLESPI_TOKEN "OnApyKKybdKqhocanYvlcqT8YqddPuXsFlH3UhpVi09qcbopXJyX0iTMwWNbfytK"
 

@@ -60,6 +60,9 @@ void setup()
 
 void loop() 
 { 
+   MOTION_SENSOR_OUTPUT = digitalRead(MOTION_SENSOR_PIN);
+   Serial.println(MOTION_SENSOR_OUTPUT);
+   
   if (!WiFi.isConnected())
   {
     Serial.println("WiFi not connected");
@@ -79,8 +82,6 @@ void loop()
   onboardLED.setPixelColor(0, onboardLED.Color(0, 0, 255));
   onboardLED.show();
   setColor(0, 250, 0);
-
-  MOTION_SENSOR_OUTPUT = digitalRead(MOTION_SENSOR_PIN);
 
   if (MOTION_SENSOR_OUTPUT == 1 && MOTION_DETECTED == 0)
   {
