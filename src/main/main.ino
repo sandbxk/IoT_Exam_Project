@@ -31,26 +31,26 @@ void setup()
   mqttClient->subscribe("door/open");
   mqttClient->subscribe("door/close");
 
-  motor->setSpeed(100); // 0 -> 255
+  motor->setSpeed(200); // 0 -> 255
 }
 
 void loop()
 {
   if (mqttClient->isConnected()) 
   {
-    mqttClient->pollIncoming();
-
-    if (mqttClient->hasMessage()) {
+    if (mqttClient->pollIncoming()) {
       auto message = mqttClient->getMessage();
       
-      if (message.topic() == "door/open") {
+      if (message.topic().equals("door/open")) {
+        Serial.println("Motor forward");
         motor->forward();
-        delay(2000); // todo: motor run until trigger
+        delay(200); // todo: motor run until trigger
         motor->stop();      
       }
-      else if (message.topic() == "door/close") {
+      else if (message.topic().equals("door/close")) {
+        Serial.println("Motor backward");
         motor->backward();
-        delay(2000); // todo: motor run until trigger
+        delay(20); // todo: motor run until trigger
         motor->stop();
       }
     }

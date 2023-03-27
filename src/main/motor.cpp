@@ -3,8 +3,8 @@
 
 void IoT::Motor::forward()
 {
-    if (this->m_direction == DIRECTION::FORWARD) { return; }
-    this->m_direction = DIRECTION::FORWARD;
+    //if (this->m_direction == DIRECTION::FORWARD) { return; }
+    //this->m_direction = DIRECTION::FORWARD;
 
     digitalWrite(this->m_d1Pin, HIGH);
     digitalWrite(this->m_d2Pin, LOW);
@@ -14,8 +14,8 @@ void IoT::Motor::forward()
 
 void IoT::Motor::backward()
 {
-    if (this->m_direction == DIRECTION::BACKWARD) { return; }
-    this->m_direction = DIRECTION::BACKWARD;
+    //if (this->m_direction == DIRECTION::BACKWARD) { return; }
+    //this->m_direction = DIRECTION::BACKWARD;
 
     digitalWrite(this->m_d1Pin, LOW);
     digitalWrite(this->m_d2Pin, HIGH);
@@ -25,8 +25,8 @@ void IoT::Motor::backward()
 
 void IoT::Motor::stop()
 {
-    if (this->m_direction == DIRECTION::NONE) { return; }
-    this->m_direction = DIRECTION::NONE;
+    //if (this->m_direction == DIRECTION::NONE) { return; }
+    //this->m_direction = DIRECTION::NONE;
     
     ledcWrite(0, 0);
 }

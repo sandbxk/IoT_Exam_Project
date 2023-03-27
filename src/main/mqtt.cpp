@@ -103,15 +103,15 @@ bool IoT::Client::pollIncoming()
 
     if (len > 0) 
     {
+        auto topic = this->m_mqttClient->messageTopic();
+        auto payload = this->m_mqttClient->readString();
+
         Serial.print("Message arrived [");
-        Serial.print(this->m_mqttClient->messageTopic());
+        Serial.print(topic);
         Serial.print("]: ");
 
         /// push the message into the queue (copy)
-        this->m_messageQueue.push(Message(
-            this->m_mqttClient->readString(),
-            this->m_mqttClient->messageTopic()
-        ));
+        this->m_messageQueue.push(Message(payload, topic));
 
         return true;
     }
@@ -140,7 +140,7 @@ IoT::Message IoT::Client::getMessage()
 { 
     /// copy the message from the queue
     auto message = this->m_messageQueue.front();
-    
+
     /// remove the message from the queue
     this->m_messageQueue.pop();
 

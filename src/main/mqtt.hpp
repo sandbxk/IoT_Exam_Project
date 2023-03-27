@@ -12,7 +12,7 @@ namespace IoT {
 
 struct Message {
 public:
-    Message(const String& payload, const String& topic) : 
+    Message(String payload, String topic) : 
     m_payload(payload), m_topic(topic) {};
 
     ~Message() {};
