@@ -13,7 +13,7 @@
 #define NUM_LEDS 1
 
 Adafruit_NeoPixel onboardLED = Adafruit_NeoPixel(1, BUILTIN_LED);
-Adafruit_NeoPixel onboardMagic = Adafruit_NeoPixel(1, DATA_PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel rgbLED = Adafruit_NeoPixel(1, DATA_PIN, NEO_GRB + NEO_KHZ800);
 
 
 int MOTION_SENSOR_PIN = 0;
@@ -35,9 +35,9 @@ IoT::Client* client = nullptr;
 
 
 void setColor(u8_t r, u8_t g, u8_t b) {
-  onboardMagic.clear();
-  onboardMagic.setPixelColor(0, onboardMagic.Color(r, g, b));
-  onboardMagic.show();
+  rgbLED.clear();
+  rgbLED.setPixelColor(0, rgbLED.Color(r, g, b));
+  rgbLED.show();
 }
 
 void setup() 
@@ -46,8 +46,8 @@ void setup()
   pinMode(MICROWAVE_SENSOR_PIN, INPUT_PULLDOWN);
   pinMode(ONBOARD_LED, OUTPUT);
   pinMode(DATA_PIN, OUTPUT);
-  onboardMagic.begin();
-  onboardMagic.setBrightness(5);
+  rgbLED.begin();
+  rgbLED.setBrightness(5);
   setColor(255, 0, 0);
 
   client = new IoT::Client(new Setting(settings));
