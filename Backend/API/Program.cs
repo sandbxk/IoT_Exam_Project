@@ -1,3 +1,5 @@
+using Application;
+using Application.Interfaces;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,8 +21,16 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
     options.EnableDetailedErrors();
 });
 
-Application.DependencyResolver.DependendencyResolverService.RegisterApplicationLayer(builder.Services);
 Infrastructure.DependencyResolver.DependencyResolverService.RegisterInfrastructureLayer(builder.Services);
+Application.DependencyResolver.DependendencyResolverService.RegisterApplicationLayer(builder.Services);
+
+MqttService mqttService = new MqttService(new MqttRepository(new DatabaseContext(
+    new DbContextOptionsBuilder<DatabaseContext>().UseSqlite("Data Source=db.db").Options))
+);
+
+mqttService.Connect();
+mqttService.Subscribe("door/open");
+mqttService.Subscribe("door/close");
 
 var app = builder.Build();
 
