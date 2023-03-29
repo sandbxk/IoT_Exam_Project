@@ -1,0 +1,294 @@
+{
+  "version": 3,
+  "targets": {
+    "net6.0": {
+      "Microsoft.Extensions.DependencyInjection/8.0.0-preview.2.23128.3": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0-preview.2.23128.3"
+        },
+        "compile": {
+          "lib/net6.0/Microsoft.Extensions.DependencyInjection.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.Extensions.DependencyInjection.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net6.0/_._": {}
+        }
+      },
+      "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.0-preview.2.23128.3": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net6.0/_._": {}
+        }
+      },
+      "MQTTnet/4.1.4.563": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/MQTTnet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/MQTTnet.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "MQTTnet.Extensions.ManagedClient/4.1.4.563": {
+        "type": "package",
+        "dependencies": {
+          "MQTTnet": "4.1.4.563"
+        },
+        "compile": {
+          "lib/net6.0/MQTTnet.Extensions.ManagedClient.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/MQTTnet.Extensions.ManagedClient.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Microsoft.Extensions.DependencyInjection/8.0.0-preview.2.23128.3": {
+      "sha512": "pucB/ZmJDQb6EJ2TwQs8ZTXOPIZFO0YjVSKuo1AkDOqxsRc70OmQ3egbVPUAC+PmtuJeietTACeNgDPqYGgH8A==",
+      "type": "package",
+      "path": "microsoft.extensions.dependencyinjection/8.0.0-preview.2.23128.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/Microsoft.Extensions.DependencyInjection.targets",
+        "buildTransitive/net462/_._",
+        "buildTransitive/net6.0/_._",
+        "buildTransitive/netcoreapp2.0/Microsoft.Extensions.DependencyInjection.targets",
+        "lib/net462/Microsoft.Extensions.DependencyInjection.dll",
+        "lib/net462/Microsoft.Extensions.DependencyInjection.xml",
+        "lib/net6.0/Microsoft.Extensions.DependencyInjection.dll",
+        "lib/net6.0/Microsoft.Extensions.DependencyInjection.xml",
+        "lib/net7.0/Microsoft.Extensions.DependencyInjection.dll",
+        "lib/net7.0/Microsoft.Extensions.DependencyInjection.xml",
+        "lib/net8.0/Microsoft.Extensions.DependencyInjection.dll",
+        "lib/net8.0/Microsoft.Extensions.DependencyInjection.xml",
+        "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.xml",
+        "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.dll",
+        "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.xml",
+        "microsoft.extensions.dependencyinjection.8.0.0-preview.2.23128.3.nupkg.sha512",
+        "microsoft.extensions.dependencyinjection.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
+    "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.0-preview.2.23128.3": {
+      "sha512": "BchUPkH1mMDCdG/lVP4VvYs4UmAY3WbSehaPBqFNcBdf1bPwuwpHJwDGRY3jn6ltHyqh2xEG/lewZNqm2TE5Kg==",
+      "type": "package",
+      "path": "microsoft.extensions.dependencyinjection.abstractions/8.0.0-preview.2.23128.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/Microsoft.Extensions.DependencyInjection.Abstractions.targets",
+        "buildTransitive/net462/_._",
+        "buildTransitive/net6.0/_._",
+        "buildTransitive/netcoreapp2.0/Microsoft.Extensions.DependencyInjection.Abstractions.targets",
+        "lib/net462/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
+        "lib/net462/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
+        "lib/net6.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
+        "lib/net6.0/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
+        "lib/net7.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
+        "lib/net7.0/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
+        "lib/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
+        "lib/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
+        "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
+        "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
+        "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
+        "microsoft.extensions.dependencyinjection.abstractions.8.0.0-preview.2.23128.3.nupkg.sha512",
+        "microsoft.extensions.dependencyinjection.abstractions.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
+    "MQTTnet/4.1.4.563": {
+      "sha512": "gO9segUcKyQJcjV7w7OOdoAIkec7cUN65vEhYutbdWcj4rbtz/oL/RDvQVVbameXc6ChkjKx7/HbO+R8ejAUZQ==",
+      "type": "package",
+      "path": "mqttnet/4.1.4.563",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net452/MQTTnet.dll",
+        "lib/net452/MQTTnet.xml",
+        "lib/net461/MQTTnet.dll",
+        "lib/net461/MQTTnet.xml",
+        "lib/net5.0/MQTTnet.dll",
+        "lib/net5.0/MQTTnet.xml",
+        "lib/net6.0/MQTTnet.dll",
+        "lib/net6.0/MQTTnet.xml",
+        "lib/netcoreapp3.1/MQTTnet.dll",
+        "lib/netcoreapp3.1/MQTTnet.xml",
+        "lib/netstandard1.3/MQTTnet.dll",
+        "lib/netstandard1.3/MQTTnet.xml",
+        "lib/netstandard2.0/MQTTnet.dll",
+        "lib/netstandard2.0/MQTTnet.xml",
+        "lib/netstandard2.1/MQTTnet.dll",
+        "lib/netstandard2.1/MQTTnet.xml",
+        "lib/uap10.0.10240/MQTTnet.dll",
+        "lib/uap10.0.10240/MQTTnet.pri",
+        "lib/uap10.0.10240/MQTTnet.xml",
+        "mqttnet.4.1.4.563.nupkg.sha512",
+        "mqttnet.nuspec",
+        "nuget.png"
+      ]
+    },
+    "MQTTnet.Extensions.ManagedClient/4.1.4.563": {
+      "sha512": "QgrSDz12YnVUdbV5Wu1tP9sgTRUJbN4jZUsHC2Bh93tAPf+6vPaeq2WAEPoyJ7MjCadyGSW0n4QFyCjgNG8Odg==",
+      "type": "package",
+      "path": "mqttnet.extensions.managedclient/4.1.4.563",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net452/MQTTnet.Extensions.ManagedClient.dll",
+        "lib/net452/MQTTnet.Extensions.ManagedClient.xml",
+        "lib/net461/MQTTnet.Extensions.ManagedClient.dll",
+        "lib/net461/MQTTnet.Extensions.ManagedClient.xml",
+        "lib/net5.0/MQTTnet.Extensions.ManagedClient.dll",
+        "lib/net5.0/MQTTnet.Extensions.ManagedClient.xml",
+        "lib/net6.0/MQTTnet.Extensions.ManagedClient.dll",
+        "lib/net6.0/MQTTnet.Extensions.ManagedClient.xml",
+        "lib/netcoreapp3.1/MQTTnet.Extensions.ManagedClient.dll",
+        "lib/netcoreapp3.1/MQTTnet.Extensions.ManagedClient.xml",
+        "lib/netstandard1.3/MQTTnet.Extensions.ManagedClient.dll",
+        "lib/netstandard1.3/MQTTnet.Extensions.ManagedClient.xml",
+        "lib/netstandard2.0/MQTTnet.Extensions.ManagedClient.dll",
+        "lib/netstandard2.0/MQTTnet.Extensions.ManagedClient.xml",
+        "lib/netstandard2.1/MQTTnet.Extensions.ManagedClient.dll",
+        "lib/netstandard2.1/MQTTnet.Extensions.ManagedClient.xml",
+        "lib/uap10.0.10240/MQTTnet.Extensions.ManagedClient.dll",
+        "lib/uap10.0.10240/MQTTnet.Extensions.ManagedClient.pri",
+        "lib/uap10.0.10240/MQTTnet.Extensions.ManagedClient.xml",
+        "mqttnet.extensions.managedclient.4.1.4.563.nupkg.sha512",
+        "mqttnet.extensions.managedclient.nuspec",
+        "nuget.png"
+      ]
+    },
+    "Domain/1.0.0": {
+      "type": "project",
+      "path": "../Domain/Domain.csproj",
+      "msbuildProject": "../Domain/Domain.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net6.0": [
+      "Domain >= 1.0.0",
+      "MQTTnet >= 4.1.4.563",
+      "MQTTnet.Extensions.ManagedClient >= 4.1.4.563",
+      "Microsoft.Extensions.DependencyInjection >= 8.0.0-preview.2.23128.3"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\Kish\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\Application\\Application.csproj",
+      "projectName": "Application",
+      "projectPath": "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\Application\\Application.csproj",
+      "packagesPath": "C:\\Users\\Kish\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\Application\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\Kish\\AppData\\Roaming\\NuGet\\NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net6.0"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "projectReferences": {
+            "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\Domain\\Domain.csproj": {
+              "projectPath": "C:\\Users\\Kish\\Documents\\GitHub\\IoT_Exam_Project\\Backend\\Domain\\Domain.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net6.0": {
+        "targetAlias": "net6.0",
+        "dependencies": {
+          "MQTTnet": {
+            "target": "Package",
+            "version": "[4.1.4.563, )"
+          },
+          "MQTTnet.Extensions.ManagedClient": {
+            "target": "Package",
+            "version": "[4.1.4.563, )"
+          },
+          "Microsoft.Extensions.DependencyInjection": {
+            "target": "Package",
+            "version": "[8.0.0-preview.2.23128.3, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
